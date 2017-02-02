@@ -1,13 +1,13 @@
-freeStyleJob('update_fork_kubernetes') {
-    displayName('update-fork-kubernetes')
-    description('Rebase the primary branch (master) in jeqo/kubernetes fork.')
+freeStyleJob('update_fork_ansible') {
+    displayName('update-fork-ansible')
+    description('Rebase the primary branch (devel) in jeqo/ansible fork.')
 
     checkoutRetryCount(3)
 
     properties {
-        githubProjectUrl('https://github.com/jeqo/kubernetes')
+        githubProjectUrl('https://github.com/jeqo/ansible')
         sidebarLinks {
-            link('https://github.com/kubernetes/kubernetes', 'UPSTREAM: kubernetes/kubernetes', 'notepad.png')
+            link('https://github.com/ansible/ansible', 'UPSTREAM: ansible/ansible', 'notepad.png')
         }
     }
 
@@ -19,17 +19,17 @@ freeStyleJob('update_fork_kubernetes') {
     scm {
         git {
             remote {
-                url('git@github.com:jeqo/kubernetes.git')
+                url('git@github.com:jeqo/ansible.git')
                 name('origin')
                 credentials('ssh-github-key')
-                refspec('+refs/heads/master:refs/remotes/origin/master')
+                refspec('+refs/heads/devel:refs/remotes/origin/devel')
             }
             remote {
-                url('https://github.com/kubernetes/kubernetes.git')
+                url('https://github.com/ansible/ansible.git')
                 name('upstream')
-                refspec('+refs/heads/master:refs/remotes/upstream/master')
+                refspec('+refs/heads/devel:refs/remotes/upstream/devel')
             }
-            branches('master', 'upstream/master')
+            branches('devel', 'upstream/devel')
             extensions {
                 disableRemotePoll()
                 wipeOutWorkspace()
@@ -45,13 +45,13 @@ freeStyleJob('update_fork_kubernetes') {
     wrappers { colorizeOutput() }
 
     steps {
-        shell('git rebase upstream/master')
+        shell('git rebase upstream/devel')
     }
 
     publishers {
         postBuildScripts {
             git {
-                branch('origin', 'master')
+                branch('origin', 'devel')
                 pushOnlyIfSuccess()
             }
         }

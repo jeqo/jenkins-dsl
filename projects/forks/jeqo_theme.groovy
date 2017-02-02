@@ -1,13 +1,13 @@
-freeStyleJob('update_fork_kubernetes') {
-    displayName('update-fork-kubernetes')
-    description('Rebase the primary branch (master) in jeqo/kubernetes fork.')
+freeStyleJob('update_fork_jeqo_theme') {
+    displayName('update-fork-jeqo-theme')
+    description('Rebase the primary branch (master) in jeqo/jeqo-theme fork.')
 
     checkoutRetryCount(3)
 
     properties {
-        githubProjectUrl('https://github.com/jeqo/kubernetes')
+        githubProjectUrl('https://github.com/jeqo/jeqo-theme')
         sidebarLinks {
-            link('https://github.com/kubernetes/kubernetes', 'UPSTREAM: kubernetes/kubernetes', 'notepad.png')
+            link('https://github.com/kritoke/jeqo-theme', 'UPSTREAM: kritoke/jeqo-theme', 'notepad.png')
         }
     }
 
@@ -19,13 +19,13 @@ freeStyleJob('update_fork_kubernetes') {
     scm {
         git {
             remote {
-                url('git@github.com:jeqo/kubernetes.git')
+                url('git@github.com:jeqo/jeqo-theme.git')
                 name('origin')
                 credentials('ssh-github-key')
                 refspec('+refs/heads/master:refs/remotes/origin/master')
             }
             remote {
-                url('https://github.com/kubernetes/kubernetes.git')
+                url('https://github.com/kritoke/jeqo-theme.git')
                 name('upstream')
                 refspec('+refs/heads/master:refs/remotes/upstream/master')
             }

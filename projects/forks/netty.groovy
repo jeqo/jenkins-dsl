@@ -1,13 +1,13 @@
-freeStyleJob('update_fork_kubernetes') {
-    displayName('update-fork-kubernetes')
-    description('Rebase the primary branch (master) in jeqo/kubernetes fork.')
+freeStyleJob('update_fork_netty') {
+    displayName('update-fork-netty')
+    description('Rebase the primary branch (4.1) in jeqo/netty fork.')
 
     checkoutRetryCount(3)
 
     properties {
-        githubProjectUrl('https://github.com/jeqo/kubernetes')
+        githubProjectUrl('https://github.com/jeqo/netty')
         sidebarLinks {
-            link('https://github.com/kubernetes/kubernetes', 'UPSTREAM: kubernetes/kubernetes', 'notepad.png')
+            link('https://github.com/netty/netty', 'UPSTREAM: netty/netty', 'notepad.png')
         }
     }
 
@@ -19,17 +19,17 @@ freeStyleJob('update_fork_kubernetes') {
     scm {
         git {
             remote {
-                url('git@github.com:jeqo/kubernetes.git')
+                url('git@github.com:jeqo/netty.git')
                 name('origin')
                 credentials('ssh-github-key')
-                refspec('+refs/heads/master:refs/remotes/origin/master')
+                refspec('+refs/heads/4.1:refs/remotes/origin/4.1')
             }
             remote {
-                url('https://github.com/kubernetes/kubernetes.git')
+                url('https://github.com/netty/netty.git')
                 name('upstream')
-                refspec('+refs/heads/master:refs/remotes/upstream/master')
+                refspec('+refs/heads/4.1:refs/remotes/upstream/4.1')
             }
-            branches('master', 'upstream/master')
+            branches('4.1', 'upstream/4.1')
             extensions {
                 disableRemotePoll()
                 wipeOutWorkspace()
@@ -45,13 +45,13 @@ freeStyleJob('update_fork_kubernetes') {
     wrappers { colorizeOutput() }
 
     steps {
-        shell('git rebase upstream/master')
+        shell('git rebase upstream/4.1')
     }
 
     publishers {
         postBuildScripts {
             git {
-                branch('origin', 'master')
+                branch('origin', '4.1')
                 pushOnlyIfSuccess()
             }
         }

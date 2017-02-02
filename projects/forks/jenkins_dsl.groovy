@@ -1,13 +1,13 @@
-freeStyleJob('update_fork_kubernetes') {
-    displayName('update-fork-kubernetes')
-    description('Rebase the primary branch (master) in jeqo/kubernetes fork.')
+freeStyleJob('update_fork_jenkins_dsl') {
+    displayName('update-fork-jenkins-dsl')
+    description('Rebase the primary branch (master) in jeqo/jenkins-dsl fork.')
 
     checkoutRetryCount(3)
 
     properties {
-        githubProjectUrl('https://github.com/jeqo/kubernetes')
+        githubProjectUrl('https://github.com/jeqo/jenkins-dsl')
         sidebarLinks {
-            link('https://github.com/kubernetes/kubernetes', 'UPSTREAM: kubernetes/kubernetes', 'notepad.png')
+            link('https://github.com/jessfraz/jenkins-dsl', 'UPSTREAM: jessfraz/jenkins-dsl', 'notepad.png')
         }
     }
 
@@ -19,13 +19,13 @@ freeStyleJob('update_fork_kubernetes') {
     scm {
         git {
             remote {
-                url('git@github.com:jeqo/kubernetes.git')
+                url('git@github.com:jeqo/jenkins-dsl.git')
                 name('origin')
                 credentials('ssh-github-key')
                 refspec('+refs/heads/master:refs/remotes/origin/master')
             }
             remote {
-                url('https://github.com/kubernetes/kubernetes.git')
+                url('https://github.com/jessfraz/jenkins-dsl.git')
                 name('upstream')
                 refspec('+refs/heads/master:refs/remotes/upstream/master')
             }

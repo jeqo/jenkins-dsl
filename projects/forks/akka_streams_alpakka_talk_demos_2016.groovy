@@ -1,13 +1,13 @@
-freeStyleJob('update_fork_kubernetes') {
-    displayName('update-fork-kubernetes')
-    description('Rebase the primary branch (master) in jeqo/kubernetes fork.')
+freeStyleJob('update_fork_akka_streams_alpakka_talk_demos_2016') {
+    displayName('update-fork-akka-streams-alpakka-talk-demos-2016')
+    description('Rebase the primary branch (master) in jeqo/akka-streams-alpakka-talk-demos-2016 fork.')
 
     checkoutRetryCount(3)
 
     properties {
-        githubProjectUrl('https://github.com/jeqo/kubernetes')
+        githubProjectUrl('https://github.com/jeqo/akka-streams-alpakka-talk-demos-2016')
         sidebarLinks {
-            link('https://github.com/kubernetes/kubernetes', 'UPSTREAM: kubernetes/kubernetes', 'notepad.png')
+            link('https://github.com/ktoso/akka-streams-alpakka-talk-demos-2016', 'UPSTREAM: ktoso/akka-streams-alpakka-talk-demos-2016', 'notepad.png')
         }
     }
 
@@ -19,13 +19,13 @@ freeStyleJob('update_fork_kubernetes') {
     scm {
         git {
             remote {
-                url('git@github.com:jeqo/kubernetes.git')
+                url('git@github.com:jeqo/akka-streams-alpakka-talk-demos-2016.git')
                 name('origin')
                 credentials('ssh-github-key')
                 refspec('+refs/heads/master:refs/remotes/origin/master')
             }
             remote {
-                url('https://github.com/kubernetes/kubernetes.git')
+                url('https://github.com/ktoso/akka-streams-alpakka-talk-demos-2016.git')
                 name('upstream')
                 refspec('+refs/heads/master:refs/remotes/upstream/master')
             }
