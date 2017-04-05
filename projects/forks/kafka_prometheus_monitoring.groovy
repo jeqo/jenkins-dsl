@@ -1,13 +1,13 @@
-freeStyleJob('mirror_ykpiv') {
-    displayName('mirror-ykpiv')
-    description('Mirror github.com/jessfraz/ykpiv to g.j3ss.co/ykpiv.')
+freeStyleJob('update_fork_kafka_prometheus_monitoring') {
+    displayName('update-fork-kafka-prometheus-monitoring')
+    description('Rebase the primary branch (master) in jeqo/kafka-prometheus-monitoring fork.')
 
     checkoutRetryCount(3)
 
     properties {
-        githubProjectUrl('https://github.com/jessfraz/ykpiv')
+        githubProjectUrl('https://github.com/jeqo/kafka-prometheus-monitoring')
         sidebarLinks {
-            link('https://git.j3ss.co/ykpiv', 'git.j3ss.co/ykpiv', 'notepad.png')
+            link('https://github.com/rama-nallamilli/kafka-prometheus-monitoring', 'UPSTREAM: rama-nallamilli/kafka-prometheus-monitoring', 'notepad.png')
         }
     }
 
@@ -19,18 +19,17 @@ freeStyleJob('mirror_ykpiv') {
     scm {
         git {
             remote {
-                url('git@github.com:jessfraz/ykpiv.git')
+                url('git@github.com:jeqo/kafka-prometheus-monitoring.git')
                 name('origin')
                 credentials('ssh-github-key')
                 refspec('+refs/heads/master:refs/remotes/origin/master')
             }
             remote {
-                url('ssh://git@g.j3ss.co:2200/~/ykpiv.git')
-                name('mirror')
-                credentials('ssh-github-key')
+                url('https://github.com/rama-nallamilli/kafka-prometheus-monitoring.git')
+                name('upstream')
                 refspec('+refs/heads/master:refs/remotes/upstream/master')
             }
-            branches('master')
+            branches('master', 'upstream/master')
             extensions {
                 disableRemotePoll()
                 wipeOutWorkspace()
@@ -45,10 +44,15 @@ freeStyleJob('mirror_ykpiv') {
 
     wrappers { colorizeOutput() }
 
+    steps {
+        shell('git rebase upstream/master')
+    }
+
     publishers {
         postBuildScripts {
             git {
-                branch('mirror', 'master')
+                branch('origin', 'master')
+                pushOnlyIfSuccess()
             }
         }
 

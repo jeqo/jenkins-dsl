@@ -1,13 +1,13 @@
-freeStyleJob('mirror_present_j3ss_co') {
-    displayName('mirror-present.j3ss.co')
-    description('Mirror github.com/jessfraz/present.j3ss.co to g.j3ss.co/present.j3ss.co.')
+freeStyleJob('update_fork_api_standards') {
+    displayName('update-fork-api-standards')
+    description('Rebase the primary branch (master) in jeqo/api-standards fork.')
 
     checkoutRetryCount(3)
 
     properties {
-        githubProjectUrl('https://github.com/jessfraz/present.j3ss.co')
+        githubProjectUrl('https://github.com/jeqo/api-standards')
         sidebarLinks {
-            link('https://git.j3ss.co/present.j3ss.co', 'git.j3ss.co/present.j3ss.co', 'notepad.png')
+            link('https://github.com/paypal/api-standards', 'UPSTREAM: paypal/api-standards', 'notepad.png')
         }
     }
 
@@ -19,18 +19,17 @@ freeStyleJob('mirror_present_j3ss_co') {
     scm {
         git {
             remote {
-                url('git@github.com:jessfraz/present.j3ss.co.git')
+                url('git@github.com:jeqo/api-standards.git')
                 name('origin')
                 credentials('ssh-github-key')
                 refspec('+refs/heads/master:refs/remotes/origin/master')
             }
             remote {
-                url('ssh://git@g.j3ss.co:2200/~/present.j3ss.co.git')
-                name('mirror')
-                credentials('ssh-github-key')
+                url('https://github.com/paypal/api-standards.git')
+                name('upstream')
                 refspec('+refs/heads/master:refs/remotes/upstream/master')
             }
-            branches('master')
+            branches('master', 'upstream/master')
             extensions {
                 disableRemotePoll()
                 wipeOutWorkspace()
@@ -45,10 +44,15 @@ freeStyleJob('mirror_present_j3ss_co') {
 
     wrappers { colorizeOutput() }
 
+    steps {
+        shell('git rebase upstream/master')
+    }
+
     publishers {
         postBuildScripts {
             git {
-                branch('mirror', 'master')
+                branch('origin', 'master')
+                pushOnlyIfSuccess()
             }
         }
 

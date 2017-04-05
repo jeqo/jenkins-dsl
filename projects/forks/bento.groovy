@@ -1,13 +1,13 @@
-freeStyleJob('mirror_magneto') {
-    displayName('mirror-magneto')
-    description('Mirror github.com/jessfraz/magneto to g.j3ss.co/magneto.')
+freeStyleJob('update_fork_bento') {
+    displayName('update-fork-bento')
+    description('Rebase the primary branch (master) in jeqo/bento fork.')
 
     checkoutRetryCount(3)
 
     properties {
-        githubProjectUrl('https://github.com/jessfraz/magneto')
+        githubProjectUrl('https://github.com/jeqo/bento')
         sidebarLinks {
-            link('https://git.j3ss.co/magneto', 'git.j3ss.co/magneto', 'notepad.png')
+            link('https://github.com/chef/bento', 'UPSTREAM: chef/bento', 'notepad.png')
         }
     }
 
@@ -19,18 +19,17 @@ freeStyleJob('mirror_magneto') {
     scm {
         git {
             remote {
-                url('git@github.com:jessfraz/magneto.git')
+                url('git@github.com:jeqo/bento.git')
                 name('origin')
                 credentials('ssh-github-key')
                 refspec('+refs/heads/master:refs/remotes/origin/master')
             }
             remote {
-                url('ssh://git@g.j3ss.co:2200/~/magneto.git')
-                name('mirror')
-                credentials('ssh-github-key')
+                url('https://github.com/chef/bento.git')
+                name('upstream')
                 refspec('+refs/heads/master:refs/remotes/upstream/master')
             }
-            branches('master')
+            branches('master', 'upstream/master')
             extensions {
                 disableRemotePoll()
                 wipeOutWorkspace()
@@ -45,10 +44,15 @@ freeStyleJob('mirror_magneto') {
 
     wrappers { colorizeOutput() }
 
+    steps {
+        shell('git rebase upstream/master')
+    }
+
     publishers {
         postBuildScripts {
             git {
-                branch('mirror', 'master')
+                branch('origin', 'master')
+                pushOnlyIfSuccess()
             }
         }
 

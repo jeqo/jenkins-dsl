@@ -1,13 +1,13 @@
-freeStyleJob('mirror_riddler') {
-    displayName('mirror-riddler')
-    description('Mirror github.com/jessfraz/riddler to g.j3ss.co/riddler.')
+freeStyleJob('update_fork_interview') {
+    displayName('update-fork-interview')
+    description('Rebase the primary branch (master) in jeqo/interview fork.')
 
     checkoutRetryCount(3)
 
     properties {
-        githubProjectUrl('https://github.com/jessfraz/riddler')
+        githubProjectUrl('https://github.com/jeqo/interview')
         sidebarLinks {
-            link('https://git.j3ss.co/riddler', 'git.j3ss.co/riddler', 'notepad.png')
+            link('https://github.com/andreis/interview', 'UPSTREAM: andreis/interview', 'notepad.png')
         }
     }
 
@@ -19,18 +19,17 @@ freeStyleJob('mirror_riddler') {
     scm {
         git {
             remote {
-                url('git@github.com:jessfraz/riddler.git')
+                url('git@github.com:jeqo/interview.git')
                 name('origin')
                 credentials('ssh-github-key')
                 refspec('+refs/heads/master:refs/remotes/origin/master')
             }
             remote {
-                url('ssh://git@g.j3ss.co:2200/~/riddler.git')
-                name('mirror')
-                credentials('ssh-github-key')
+                url('https://github.com/andreis/interview.git')
+                name('upstream')
                 refspec('+refs/heads/master:refs/remotes/upstream/master')
             }
-            branches('master')
+            branches('master', 'upstream/master')
             extensions {
                 disableRemotePoll()
                 wipeOutWorkspace()
@@ -45,10 +44,15 @@ freeStyleJob('mirror_riddler') {
 
     wrappers { colorizeOutput() }
 
+    steps {
+        shell('git rebase upstream/master')
+    }
+
     publishers {
         postBuildScripts {
             git {
-                branch('mirror', 'master')
+                branch('origin', 'master')
+                pushOnlyIfSuccess()
             }
         }
 

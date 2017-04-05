@@ -1,13 +1,13 @@
-freeStyleJob('mirror_blog') {
-    displayName('mirror-blog')
-    description('Mirror github.com/jessfraz/blog to g.j3ss.co/blog.')
+freeStyleJob('update_fork_flowing_retail') {
+    displayName('update-fork-flowing-retail')
+    description('Rebase the primary branch (master) in jeqo/flowing-retail fork.')
 
     checkoutRetryCount(3)
 
     properties {
-        githubProjectUrl('https://github.com/jessfraz/blog')
+        githubProjectUrl('https://github.com/jeqo/flowing-retail')
         sidebarLinks {
-            link('https://git.j3ss.co/blog', 'git.j3ss.co/blog', 'notepad.png')
+            link('https://github.com/flowing/flowing-retail', 'UPSTREAM: flowing/flowing-retail', 'notepad.png')
         }
     }
 
@@ -19,18 +19,17 @@ freeStyleJob('mirror_blog') {
     scm {
         git {
             remote {
-                url('git@github.com:jessfraz/blog.git')
+                url('git@github.com:jeqo/flowing-retail.git')
                 name('origin')
                 credentials('ssh-github-key')
                 refspec('+refs/heads/master:refs/remotes/origin/master')
             }
             remote {
-                url('ssh://git@g.j3ss.co:2200/~/blog.git')
-                name('mirror')
-                credentials('ssh-github-key')
+                url('https://github.com/flowing/flowing-retail.git')
+                name('upstream')
                 refspec('+refs/heads/master:refs/remotes/upstream/master')
             }
-            branches('master')
+            branches('master', 'upstream/master')
             extensions {
                 disableRemotePoll()
                 wipeOutWorkspace()
@@ -45,10 +44,15 @@ freeStyleJob('mirror_blog') {
 
     wrappers { colorizeOutput() }
 
+    steps {
+        shell('git rebase upstream/master')
+    }
+
     publishers {
         postBuildScripts {
             git {
-                branch('mirror', 'master')
+                branch('origin', 'master')
+                pushOnlyIfSuccess()
             }
         }
 

@@ -1,13 +1,13 @@
-freeStyleJob('mirror_onion') {
-    displayName('mirror-onion')
-    description('Mirror github.com/jessfraz/onion to g.j3ss.co/onion.')
+freeStyleJob('update_fork_coding_interview_university') {
+    displayName('update-fork-coding-interview-university')
+    description('Rebase the primary branch (master) in jeqo/coding-interview-university fork.')
 
     checkoutRetryCount(3)
 
     properties {
-        githubProjectUrl('https://github.com/jessfraz/onion')
+        githubProjectUrl('https://github.com/jeqo/coding-interview-university')
         sidebarLinks {
-            link('https://git.j3ss.co/onion', 'git.j3ss.co/onion', 'notepad.png')
+            link('https://github.com/jwasham/coding-interview-university', 'UPSTREAM: jwasham/coding-interview-university', 'notepad.png')
         }
     }
 
@@ -19,18 +19,17 @@ freeStyleJob('mirror_onion') {
     scm {
         git {
             remote {
-                url('git@github.com:jessfraz/onion.git')
+                url('git@github.com:jeqo/coding-interview-university.git')
                 name('origin')
                 credentials('ssh-github-key')
                 refspec('+refs/heads/master:refs/remotes/origin/master')
             }
             remote {
-                url('ssh://git@g.j3ss.co:2200/~/onion.git')
-                name('mirror')
-                credentials('ssh-github-key')
+                url('https://github.com/jwasham/coding-interview-university.git')
+                name('upstream')
                 refspec('+refs/heads/master:refs/remotes/upstream/master')
             }
-            branches('master')
+            branches('master', 'upstream/master')
             extensions {
                 disableRemotePoll()
                 wipeOutWorkspace()
@@ -45,10 +44,15 @@ freeStyleJob('mirror_onion') {
 
     wrappers { colorizeOutput() }
 
+    steps {
+        shell('git rebase upstream/master')
+    }
+
     publishers {
         postBuildScripts {
             git {
-                branch('mirror', 'master')
+                branch('origin', 'master')
+                pushOnlyIfSuccess()
             }
         }
 
