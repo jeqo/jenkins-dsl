@@ -49,7 +49,7 @@ freeStyleJob('update_fork_kafka') {
     }
 
     publishers {
-        postBuildScripts {
+        postBuildTask {
             git {
                 branch('origin', 'trunk')
                 pushOnlyIfSuccess()

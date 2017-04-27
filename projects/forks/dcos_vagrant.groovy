@@ -49,7 +49,7 @@ freeStyleJob('update_fork_dcos_vagrant') {
     }
 
     publishers {
-        postBuildScripts {
+        postBuildTask {
             git {
                 branch('origin', 'master')
                 pushOnlyIfSuccess()

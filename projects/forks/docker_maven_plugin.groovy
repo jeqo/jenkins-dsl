@@ -49,7 +49,7 @@ freeStyleJob('update_fork_docker_maven_plugin') {
     }
 
     publishers {
-        postBuildScripts {
+        postBuildTask {
             git {
                 branch('origin', 'master')
                 pushOnlyIfSuccess()

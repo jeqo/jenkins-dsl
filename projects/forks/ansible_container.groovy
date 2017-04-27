@@ -49,7 +49,7 @@ freeStyleJob('update_fork_ansible_container') {
     }
 
     publishers {
-        postBuildScripts {
+        postBuildTask {
             git {
                 branch('origin', 'master')
                 pushOnlyIfSuccess()

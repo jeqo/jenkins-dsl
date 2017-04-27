@@ -49,7 +49,7 @@ freeStyleJob('update_fork_kafka_connect_twitter') {
     }
 
     publishers {
-        postBuildScripts {
+        postBuildTask {
             git {
                 branch('origin', 'master')
                 pushOnlyIfSuccess()

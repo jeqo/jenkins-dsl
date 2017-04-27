@@ -49,7 +49,7 @@ freeStyleJob('update_fork_coding_interview_university') {
     }
 
     publishers {
-        postBuildScripts {
+        postBuildTask {
             git {
                 branch('origin', 'master')
                 pushOnlyIfSuccess()

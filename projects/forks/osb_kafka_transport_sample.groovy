@@ -49,7 +49,7 @@ freeStyleJob('update_fork_osb_kafka_transport_sample') {
     }
 
     publishers {
-        postBuildScripts {
+        postBuildTask {
             git {
                 branch('origin', 'master')
                 pushOnlyIfSuccess()

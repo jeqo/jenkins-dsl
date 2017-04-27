@@ -49,7 +49,7 @@ freeStyleJob('update_fork_kargo') {
     }
 
     publishers {
-        postBuildScripts {
+        postBuildTask {
             git {
                 branch('origin', 'master')
                 pushOnlyIfSuccess()

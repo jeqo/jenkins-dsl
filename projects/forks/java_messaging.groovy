@@ -49,7 +49,7 @@ freeStyleJob('update_fork_java_messaging') {
     }
 
     publishers {
-        postBuildScripts {
+        postBuildTask {
             git {
                 branch('origin', 'master')
                 pushOnlyIfSuccess()

@@ -94,7 +94,7 @@ freeStyleJob('mirror_${rname//./_}') {
     wrappers { colorizeOutput() }
 
     publishers {
-        postBuildScripts {
+        postBuildTask {
             git {
                 branch('mirror', '${primary_branch}')
             }

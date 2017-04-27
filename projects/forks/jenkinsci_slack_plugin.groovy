@@ -49,7 +49,7 @@ freeStyleJob('update_fork_jenkinsci_slack_plugin') {
     }
 
     publishers {
-        postBuildScripts {
+        postBuildTask {
             git {
                 branch('origin', 'master')
                 pushOnlyIfSuccess()

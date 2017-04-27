@@ -49,7 +49,7 @@ freeStyleJob('update_fork_kubernetes_the_hard_way') {
     }
 
     publishers {
-        postBuildScripts {
+        postBuildTask {
             git {
                 branch('origin', 'master')
                 pushOnlyIfSuccess()

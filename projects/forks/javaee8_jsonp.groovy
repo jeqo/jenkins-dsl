@@ -49,7 +49,7 @@ freeStyleJob('update_fork_javaee8_jsonp') {
     }
 
     publishers {
-        postBuildScripts {
+        postBuildTask {
             git {
                 branch('origin', 'master')
                 pushOnlyIfSuccess()

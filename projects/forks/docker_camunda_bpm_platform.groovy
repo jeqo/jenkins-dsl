@@ -49,7 +49,7 @@ freeStyleJob('update_fork_docker_camunda_bpm_platform') {
     }
 
     publishers {
-        postBuildScripts {
+        postBuildTask {
             git {
                 branch('origin', 'master')
                 pushOnlyIfSuccess()

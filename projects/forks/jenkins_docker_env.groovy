@@ -49,7 +49,7 @@ freeStyleJob('update_fork_jenkins_docker_env') {
     }
 
     publishers {
-        postBuildScripts {
+        postBuildTask {
             git {
                 branch('origin', 'master')
                 pushOnlyIfSuccess()

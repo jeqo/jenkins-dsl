@@ -49,7 +49,7 @@ freeStyleJob('update_fork_packer_post_processor_docker_dockerfile') {
     }
 
     publishers {
-        postBuildScripts {
+        postBuildTask {
             git {
                 branch('origin', 'master')
                 pushOnlyIfSuccess()

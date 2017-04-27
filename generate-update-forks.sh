@@ -93,7 +93,7 @@ freeStyleJob('update_fork_${rname//./_}') {
     }
 
     publishers {
-        postBuildScripts {
+        postBuildTask {
             git {
                 branch('origin', '${primary_branch}')
                 pushOnlyIfSuccess()

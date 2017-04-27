@@ -49,7 +49,7 @@ freeStyleJob('update_fork_packer_qemu_templates') {
     }
 
     publishers {
-        postBuildScripts {
+        postBuildTask {
             git {
                 branch('origin', 'master')
                 pushOnlyIfSuccess()

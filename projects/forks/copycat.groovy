@@ -49,7 +49,7 @@ freeStyleJob('update_fork_copycat') {
     }
 
     publishers {
-        postBuildScripts {
+        postBuildTask {
             git {
                 branch('origin', 'master')
                 pushOnlyIfSuccess()

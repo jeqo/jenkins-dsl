@@ -49,7 +49,7 @@ freeStyleJob('update_fork_intro_to_kubernetes_workshop') {
     }
 
     publishers {
-        postBuildScripts {
+        postBuildTask {
             git {
                 branch('origin', 'master')
                 pushOnlyIfSuccess()

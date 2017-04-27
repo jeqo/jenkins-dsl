@@ -49,7 +49,7 @@ freeStyleJob('update_fork_arquillian_cube_maven_demos') {
     }
 
     publishers {
-        postBuildScripts {
+        postBuildTask {
             git {
                 branch('origin', 'master')
                 pushOnlyIfSuccess()

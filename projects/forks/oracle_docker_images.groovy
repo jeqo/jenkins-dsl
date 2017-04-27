@@ -49,7 +49,7 @@ freeStyleJob('update_fork_oracle_docker_images') {
     }
 
     publishers {
-        postBuildScripts {
+        postBuildTask {
             git {
                 branch('origin', 'master')
                 pushOnlyIfSuccess()

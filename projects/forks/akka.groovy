@@ -49,7 +49,7 @@ freeStyleJob('update_fork_akka') {
     }
 
     publishers {
-        postBuildScripts {
+        postBuildTask {
             git {
                 branch('origin', 'master')
                 pushOnlyIfSuccess()

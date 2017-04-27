@@ -49,7 +49,7 @@ freeStyleJob('update_fork_ansible_role_nfs') {
     }
 
     publishers {
-        postBuildScripts {
+        postBuildTask {
             git {
                 branch('origin', 'master')
                 pushOnlyIfSuccess()

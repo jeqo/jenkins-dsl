@@ -49,7 +49,7 @@ freeStyleJob('update_fork_akka_streams_alpakka_talk_demos_2016') {
     }
 
     publishers {
-        postBuildScripts {
+        postBuildTask {
             git {
                 branch('origin', 'master')
                 pushOnlyIfSuccess()

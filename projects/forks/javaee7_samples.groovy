@@ -49,7 +49,7 @@ freeStyleJob('update_fork_javaee7_samples') {
     }
 
     publishers {
-        postBuildScripts {
+        postBuildTask {
             git {
                 branch('origin', 'master')
                 pushOnlyIfSuccess()

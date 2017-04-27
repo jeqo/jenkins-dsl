@@ -49,7 +49,7 @@ freeStyleJob('update_fork_camunda_bpm_spring_boot_starter') {
     }
 
     publishers {
-        postBuildScripts {
+        postBuildTask {
             git {
                 branch('origin', 'master')
                 pushOnlyIfSuccess()

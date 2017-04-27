@@ -90,7 +90,7 @@ EOF
     }
 
     publishers {
-	    postBuildScripts {
+	    postBuildTask {
             steps {
                 shell('docker rm \$(docker ps --filter status=exited -q 2>/dev/null) 2> /dev/null || true')
                 shell('docker rmi \$(docker images --filter dangling=true -q 2>/dev/null) 2> /dev/null || true')

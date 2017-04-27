@@ -49,7 +49,7 @@ freeStyleJob('update_fork_papers_we_love') {
     }
 
     publishers {
-        postBuildScripts {
+        postBuildTask {
             git {
                 branch('origin', 'master')
                 pushOnlyIfSuccess()

@@ -49,7 +49,7 @@ freeStyleJob('update_fork_opentracing_java') {
     }
 
     publishers {
-        postBuildScripts {
+        postBuildTask {
             git {
                 branch('origin', 'master')
                 pushOnlyIfSuccess()

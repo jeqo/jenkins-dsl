@@ -49,7 +49,7 @@ freeStyleJob('update_fork_netty') {
     }
 
     publishers {
-        postBuildScripts {
+        postBuildTask {
             git {
                 branch('origin', '4.1')
                 pushOnlyIfSuccess()

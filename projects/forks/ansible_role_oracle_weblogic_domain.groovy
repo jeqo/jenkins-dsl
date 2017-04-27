@@ -49,7 +49,7 @@ freeStyleJob('update_fork_ansible_role_oracle_weblogic_domain') {
     }
 
     publishers {
-        postBuildScripts {
+        postBuildTask {
             git {
                 branch('origin', 'master')
                 pushOnlyIfSuccess()
