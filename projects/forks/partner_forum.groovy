@@ -1,13 +1,13 @@
-freeStyleJob('update_fork_packer') {
-    displayName('update-fork-packer')
-    description('Rebase the primary branch (master) in jeqo/packer fork.')
+freeStyleJob('update_fork_partner_forum') {
+    displayName('update-fork-partner-forum')
+    description('Rebase the primary branch (master) in jeqo/partner-forum fork.')
 
     checkoutRetryCount(3)
 
     properties {
-        githubProjectUrl('https://github.com/jeqo/packer')
+        githubProjectUrl('https://github.com/jeqo/partner-forum')
         sidebarLinks {
-            link('https://github.com/hashicorp/packer', 'UPSTREAM: hashicorp/packer', 'notepad.png')
+            link('https://github.com/oracle-weblogic/partner-forum', 'UPSTREAM: oracle-weblogic/partner-forum', 'notepad.png')
         }
     }
 
@@ -19,13 +19,13 @@ freeStyleJob('update_fork_packer') {
     scm {
         git {
             remote {
-                url('git@github.com:jeqo/packer.git')
+                url('git@github.com:jeqo/partner-forum.git')
                 name('origin')
                 credentials('ssh-github-key')
                 refspec('+refs/heads/master:refs/remotes/origin/master')
             }
             remote {
-                url('https://github.com/hashicorp/packer.git')
+                url('https://github.com/oracle-weblogic/partner-forum.git')
                 name('upstream')
                 refspec('+refs/heads/master:refs/remotes/upstream/master')
             }

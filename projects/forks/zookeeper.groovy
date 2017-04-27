@@ -1,13 +1,13 @@
-freeStyleJob('update_fork_packer') {
-    displayName('update-fork-packer')
-    description('Rebase the primary branch (master) in jeqo/packer fork.')
+freeStyleJob('update_fork_zookeeper') {
+    displayName('update-fork-zookeeper')
+    description('Rebase the primary branch (master) in jeqo/zookeeper fork.')
 
     checkoutRetryCount(3)
 
     properties {
-        githubProjectUrl('https://github.com/jeqo/packer')
+        githubProjectUrl('https://github.com/jeqo/zookeeper')
         sidebarLinks {
-            link('https://github.com/hashicorp/packer', 'UPSTREAM: hashicorp/packer', 'notepad.png')
+            link('https://github.com/apache/zookeeper', 'UPSTREAM: apache/zookeeper', 'notepad.png')
         }
     }
 
@@ -19,13 +19,13 @@ freeStyleJob('update_fork_packer') {
     scm {
         git {
             remote {
-                url('git@github.com:jeqo/packer.git')
+                url('git@github.com:jeqo/zookeeper.git')
                 name('origin')
                 credentials('ssh-github-key')
                 refspec('+refs/heads/master:refs/remotes/origin/master')
             }
             remote {
-                url('https://github.com/hashicorp/packer.git')
+                url('https://github.com/apache/zookeeper.git')
                 name('upstream')
                 refspec('+refs/heads/master:refs/remotes/upstream/master')
             }

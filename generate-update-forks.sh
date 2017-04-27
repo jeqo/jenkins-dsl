@@ -121,7 +121,7 @@ EOF
 main(){
 	# send the request
 	local response
-	response=$(curl -sSL -H "${AUTH_HEADER}" -H "${API_HEADER}" "${URI}/users/${GITHUB_USER}/repos?per_page=${DEFAULT_PER_PAGE}")
+	response=$(curl -sSL -H "${AUTH_HEADER}" -H "${API_HEADER}" "${URI}/users/${GITHUB_USER}/repos?page=2&per_page=${DEFAULT_PER_PAGE}")
 	local repos
 	repos=$(echo "$response" | jq --raw-output '.[] | {fullname:.full_name,repo:.name,fork:.fork} | @base64')
 

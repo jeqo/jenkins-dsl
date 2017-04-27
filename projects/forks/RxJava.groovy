@@ -1,13 +1,13 @@
-freeStyleJob('update_fork_packer') {
-    displayName('update-fork-packer')
-    description('Rebase the primary branch (master) in jeqo/packer fork.')
+freeStyleJob('update_fork_RxJava') {
+    displayName('update-fork-RxJava')
+    description('Rebase the primary branch (1.x) in jeqo/RxJava fork.')
 
     checkoutRetryCount(3)
 
     properties {
-        githubProjectUrl('https://github.com/jeqo/packer')
+        githubProjectUrl('https://github.com/jeqo/RxJava')
         sidebarLinks {
-            link('https://github.com/hashicorp/packer', 'UPSTREAM: hashicorp/packer', 'notepad.png')
+            link('https://github.com/ReactiveX/RxJava', 'UPSTREAM: ReactiveX/RxJava', 'notepad.png')
         }
     }
 
@@ -19,17 +19,17 @@ freeStyleJob('update_fork_packer') {
     scm {
         git {
             remote {
-                url('git@github.com:jeqo/packer.git')
+                url('git@github.com:jeqo/RxJava.git')
                 name('origin')
                 credentials('ssh-github-key')
-                refspec('+refs/heads/master:refs/remotes/origin/master')
+                refspec('+refs/heads/1.x:refs/remotes/origin/1.x')
             }
             remote {
-                url('https://github.com/hashicorp/packer.git')
+                url('https://github.com/ReactiveX/RxJava.git')
                 name('upstream')
-                refspec('+refs/heads/master:refs/remotes/upstream/master')
+                refspec('+refs/heads/1.x:refs/remotes/upstream/1.x')
             }
-            branches('master', 'upstream/master')
+            branches('1.x', 'upstream/1.x')
             extensions {
                 disableRemotePoll()
                 wipeOutWorkspace()
@@ -45,13 +45,13 @@ freeStyleJob('update_fork_packer') {
     wrappers { colorizeOutput() }
 
     steps {
-        shell('git rebase upstream/master')
+        shell('git rebase upstream/1.x')
     }
 
     publishers {
         postBuildTask {
             git {
-                branch('origin', 'master')
+                branch('origin', '1.x')
                 pushOnlyIfSuccess()
             }
         }

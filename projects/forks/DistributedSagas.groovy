@@ -1,13 +1,13 @@
-freeStyleJob('update_fork_packer') {
-    displayName('update-fork-packer')
-    description('Rebase the primary branch (master) in jeqo/packer fork.')
+freeStyleJob('update_fork_DistributedSagas') {
+    displayName('update-fork-DistributedSagas')
+    description('Rebase the primary branch (master) in jeqo/DistributedSagas fork.')
 
     checkoutRetryCount(3)
 
     properties {
-        githubProjectUrl('https://github.com/jeqo/packer')
+        githubProjectUrl('https://github.com/jeqo/DistributedSagas')
         sidebarLinks {
-            link('https://github.com/hashicorp/packer', 'UPSTREAM: hashicorp/packer', 'notepad.png')
+            link('https://github.com/CaitieM20/DistributedSagas', 'UPSTREAM: CaitieM20/DistributedSagas', 'notepad.png')
         }
     }
 
@@ -19,13 +19,13 @@ freeStyleJob('update_fork_packer') {
     scm {
         git {
             remote {
-                url('git@github.com:jeqo/packer.git')
+                url('git@github.com:jeqo/DistributedSagas.git')
                 name('origin')
                 credentials('ssh-github-key')
                 refspec('+refs/heads/master:refs/remotes/origin/master')
             }
             remote {
-                url('https://github.com/hashicorp/packer.git')
+                url('https://github.com/CaitieM20/DistributedSagas.git')
                 name('upstream')
                 refspec('+refs/heads/master:refs/remotes/upstream/master')
             }
