@@ -22,7 +22,8 @@ API_VERSION=v3
 API_HEADER="Accept: application/vnd.github.${API_VERSION}+json"
 AUTH_HEADER="Authorization: token ${GITHUB_TOKEN}"
 
-DEFAULT_PER_PAGE=100
+DEFAULT_PER_PAGE=50
+PAGE=4
 
 ignore_repos=( mac-dev-setup )
 
@@ -120,8 +121,9 @@ EOF
 
 main(){
 	# send the request
+        # add page=number to filter by page
 	local response
-	response=$(curl -sSL -H "${AUTH_HEADER}" -H "${API_HEADER}" "${URI}/users/${GITHUB_USER}/repos?page=2&per_page=${DEFAULT_PER_PAGE}")
+	response=$(curl -sSL -H "${AUTH_HEADER}" -H "${API_HEADER}" "${URI}/users/${GITHUB_USER}/repos?page=${PAGE}&per_page=${DEFAULT_PER_PAGE}")
 	local repos
 	repos=$(echo "$response" | jq --raw-output '.[] | {fullname:.full_name,repo:.name,fork:.fork} | @base64')
 
