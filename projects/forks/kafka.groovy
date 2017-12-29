@@ -1,13 +1,13 @@
-freeStyleJob('update_fork_confluent_schema_registry') {
-    displayName('update-fork-confluent-schema-registry')
-    description('Rebase the primary branch (master) in jeqo/confluent-schema-registry fork.')
+freeStyleJob('update_fork_kafka') {
+    displayName('update-fork-kafka')
+    description('Rebase the primary branch (trunk) in jeqo/kafka fork.')
 
     checkoutRetryCount(3)
 
     properties {
-        githubProjectUrl('https://github.com/jeqo/confluent-schema-registry')
+        githubProjectUrl('https://github.com/jeqo/kafka')
         sidebarLinks {
-            link('https://github.com/confluentinc/schema-registry', 'UPSTREAM: confluentinc/schema-registry', 'notepad.png')
+            link('https://github.com/apache/kafka', 'UPSTREAM: apache/kafka', 'notepad.png')
         }
     }
 
@@ -19,17 +19,17 @@ freeStyleJob('update_fork_confluent_schema_registry') {
     scm {
         git {
             remote {
-                url('git@github.com:jeqo/confluent-schema-registry.git')
+                url('git@github.com:jeqo/kafka.git')
                 name('origin')
                 credentials('ssh-github-key')
-                refspec('+refs/heads/master:refs/remotes/origin/master')
+                refspec('+refs/heads/trunk:refs/remotes/origin/trunk')
             }
             remote {
-                url('https://github.com/confluentinc/schema-registry.git')
+                url('https://github.com/apache/kafka.git')
                 name('upstream')
-                refspec('+refs/heads/master:refs/remotes/upstream/master')
+                refspec('+refs/heads/trunk:refs/remotes/upstream/trunk')
             }
-            branches('master', 'upstream/master')
+            branches('trunk', 'upstream/trunk')
             extensions {
                 disableRemotePoll()
                 wipeOutWorkspace()
@@ -45,13 +45,13 @@ freeStyleJob('update_fork_confluent_schema_registry') {
     wrappers { colorizeOutput() }
 
     steps {
-        shell('git rebase upstream/master')
+        shell('git rebase upstream/trunk')
     }
 
     publishers {
         postBuildTask {
             git {
-                branch('origin', 'master')
+                branch('origin', 'trunk')
                 pushOnlyIfSuccess()
             }
         }

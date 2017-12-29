@@ -7,7 +7,7 @@ freeStyleJob('update_fork_confluent_rest_utils') {
     properties {
         githubProjectUrl('https://github.com/jeqo/confluent-rest-utils')
         sidebarLinks {
-            link('https://github.com/confluentinc/confluent-rest-utils', 'UPSTREAM: confluentinc/confluent-rest-utils', 'notepad.png')
+            link('https://github.com/confluentinc/rest-utils', 'UPSTREAM: confluentinc/rest-utils', 'notepad.png')
         }
     }
 
@@ -25,7 +25,7 @@ freeStyleJob('update_fork_confluent_rest_utils') {
                 refspec('+refs/heads/master:refs/remotes/origin/master')
             }
             remote {
-                url('https://github.com/confluentinc/confluent-rest-utils.git')
+                url('https://github.com/confluentinc/rest-utils.git')
                 name('upstream')
                 refspec('+refs/heads/master:refs/remotes/upstream/master')
             }

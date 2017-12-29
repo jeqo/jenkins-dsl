@@ -7,7 +7,7 @@ freeStyleJob('update_fork_confluent_kafka_rest') {
     properties {
         githubProjectUrl('https://github.com/jeqo/confluent-kafka-rest')
         sidebarLinks {
-            link('https://github.com/confluentinc/confluent-kafka-rest', 'UPSTREAM: confluentinc/confluent-kafka-rest', 'notepad.png')
+            link('https://github.com/confluentinc/kafka-rest', 'UPSTREAM: confluentinc/kafka-rest', 'notepad.png')
         }
     }
 
@@ -25,7 +25,7 @@ freeStyleJob('update_fork_confluent_kafka_rest') {
                 refspec('+refs/heads/master:refs/remotes/origin/master')
             }
             remote {
-                url('https://github.com/confluentinc/confluent-kafka-rest.git')
+                url('https://github.com/confluentinc/kafka-rest.git')
                 name('upstream')
                 refspec('+refs/heads/master:refs/remotes/upstream/master')
             }

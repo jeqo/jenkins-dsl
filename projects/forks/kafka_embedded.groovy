@@ -1,13 +1,13 @@
-freeStyleJob('update_fork_confluent_schema_registry') {
-    displayName('update-fork-confluent-schema-registry')
-    description('Rebase the primary branch (master) in jeqo/confluent-schema-registry fork.')
+freeStyleJob('update_fork_kafka_embedded') {
+    displayName('update-fork-kafka-embedded')
+    description('Rebase the primary branch (develop) in jeqo/kafka-embedded fork.')
 
     checkoutRetryCount(3)
 
     properties {
-        githubProjectUrl('https://github.com/jeqo/confluent-schema-registry')
+        githubProjectUrl('https://github.com/jeqo/kafka-embedded')
         sidebarLinks {
-            link('https://github.com/confluentinc/schema-registry', 'UPSTREAM: confluentinc/schema-registry', 'notepad.png')
+            link('https://github.com/miguno/kafka-embedded', 'UPSTREAM: miguno/kafka-embedded', 'notepad.png')
         }
     }
 
@@ -19,17 +19,17 @@ freeStyleJob('update_fork_confluent_schema_registry') {
     scm {
         git {
             remote {
-                url('git@github.com:jeqo/confluent-schema-registry.git')
+                url('git@github.com:jeqo/kafka-embedded.git')
                 name('origin')
                 credentials('ssh-github-key')
-                refspec('+refs/heads/master:refs/remotes/origin/master')
+                refspec('+refs/heads/develop:refs/remotes/origin/develop')
             }
             remote {
-                url('https://github.com/confluentinc/schema-registry.git')
+                url('https://github.com/miguno/kafka-embedded.git')
                 name('upstream')
-                refspec('+refs/heads/master:refs/remotes/upstream/master')
+                refspec('+refs/heads/develop:refs/remotes/upstream/develop')
             }
-            branches('master', 'upstream/master')
+            branches('develop', 'upstream/develop')
             extensions {
                 disableRemotePoll()
                 wipeOutWorkspace()
@@ -45,13 +45,13 @@ freeStyleJob('update_fork_confluent_schema_registry') {
     wrappers { colorizeOutput() }
 
     steps {
-        shell('git rebase upstream/master')
+        shell('git rebase upstream/develop')
     }
 
     publishers {
         postBuildTask {
             git {
-                branch('origin', 'master')
+                branch('origin', 'develop')
                 pushOnlyIfSuccess()
             }
         }

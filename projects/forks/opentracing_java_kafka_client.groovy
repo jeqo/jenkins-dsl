@@ -1,13 +1,13 @@
-freeStyleJob('update_fork_confluent_schema_registry') {
-    displayName('update-fork-confluent-schema-registry')
-    description('Rebase the primary branch (master) in jeqo/confluent-schema-registry fork.')
+freeStyleJob('update_fork_opentracing_java_kafka_client') {
+    displayName('update-fork-opentracing-java-kafka-client')
+    description('Rebase the primary branch (master) in jeqo/opentracing-java-kafka-client fork.')
 
     checkoutRetryCount(3)
 
     properties {
-        githubProjectUrl('https://github.com/jeqo/confluent-schema-registry')
+        githubProjectUrl('https://github.com/jeqo/opentracing-java-kafka-client')
         sidebarLinks {
-            link('https://github.com/confluentinc/schema-registry', 'UPSTREAM: confluentinc/schema-registry', 'notepad.png')
+            link('https://github.com/opentracing-contrib/opentracing-java-kafka-client', 'UPSTREAM: opentracing-contrib/opentracing-java-kafka-client', 'notepad.png')
         }
     }
 
@@ -19,13 +19,13 @@ freeStyleJob('update_fork_confluent_schema_registry') {
     scm {
         git {
             remote {
-                url('git@github.com:jeqo/confluent-schema-registry.git')
+                url('git@github.com:jeqo/opentracing-java-kafka-client.git')
                 name('origin')
                 credentials('ssh-github-key')
                 refspec('+refs/heads/master:refs/remotes/origin/master')
             }
             remote {
-                url('https://github.com/confluentinc/schema-registry.git')
+                url('https://github.com/opentracing-contrib/opentracing-java-kafka-client.git')
                 name('upstream')
                 refspec('+refs/heads/master:refs/remotes/upstream/master')
             }
