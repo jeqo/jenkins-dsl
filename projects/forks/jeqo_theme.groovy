@@ -1,13 +1,13 @@
-freeStyleJob('update_fork_confluent_kafka_rest') {
-    displayName('update-fork-confluent-kafka-rest')
-    description('Rebase the primary branch (master) in jeqo/confluent-kafka-rest fork.')
+freeStyleJob('update_fork_jeqo_theme') {
+    displayName('update-fork-jeqo-theme')
+    description('Rebase the primary branch (master) in jeqo/jeqo-theme fork.')
 
     checkoutRetryCount(3)
 
     properties {
-        githubProjectUrl('https://github.com/jeqo/confluent-kafka-rest')
+        githubProjectUrl('https://github.com/jeqo/jeqo-theme')
         sidebarLinks {
-            link('https://github.com/confluentinc/confluent-kafka-rest', 'UPSTREAM: confluentinc/confluent-kafka-rest', 'notepad.png')
+            link('https://github.com/kritoke/jeqo-theme', 'UPSTREAM: kritoke/jeqo-theme', 'notepad.png')
         }
     }
 
@@ -19,13 +19,13 @@ freeStyleJob('update_fork_confluent_kafka_rest') {
     scm {
         git {
             remote {
-                url('git@github.com:jeqo/confluent-kafka-rest.git')
+                url('git@github.com:jeqo/jeqo-theme.git')
                 name('origin')
                 credentials('ssh-github-key')
                 refspec('+refs/heads/master:refs/remotes/origin/master')
             }
             remote {
-                url('https://github.com/confluentinc/confluent-kafka-rest.git')
+                url('https://github.com/kritoke/jeqo-theme.git')
                 name('upstream')
                 refspec('+refs/heads/master:refs/remotes/upstream/master')
             }

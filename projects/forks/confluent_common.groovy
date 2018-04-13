@@ -7,7 +7,7 @@ freeStyleJob('update_fork_confluent_common') {
     properties {
         githubProjectUrl('https://github.com/jeqo/confluent-common')
         sidebarLinks {
-            link('https://github.com/confluentinc/common', 'UPSTREAM: confluentinc/common', 'notepad.png')
+            link('https://github.com/confluentinc/confluent-common', 'UPSTREAM: confluentinc/confluent-common', 'notepad.png')
         }
     }
 
@@ -25,7 +25,7 @@ freeStyleJob('update_fork_confluent_common') {
                 refspec('+refs/heads/master:refs/remotes/origin/master')
             }
             remote {
-                url('https://github.com/confluentinc/common.git')
+                url('https://github.com/confluentinc/confluent-common.git')
                 name('upstream')
                 refspec('+refs/heads/master:refs/remotes/upstream/master')
             }

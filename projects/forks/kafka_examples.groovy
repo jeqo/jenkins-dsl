@@ -1,13 +1,13 @@
-freeStyleJob('update_fork_confluent_kafka_rest') {
-    displayName('update-fork-confluent-kafka-rest')
-    description('Rebase the primary branch (master) in jeqo/confluent-kafka-rest fork.')
+freeStyleJob('update_fork_kafka_examples') {
+    displayName('update-fork-kafka-examples')
+    description('Rebase the primary branch (master) in jeqo/kafka-examples fork.')
 
     checkoutRetryCount(3)
 
     properties {
-        githubProjectUrl('https://github.com/jeqo/confluent-kafka-rest')
+        githubProjectUrl('https://github.com/jeqo/kafka-examples')
         sidebarLinks {
-            link('https://github.com/confluentinc/confluent-kafka-rest', 'UPSTREAM: confluentinc/confluent-kafka-rest', 'notepad.png')
+            link('https://github.com/gwenshap/kafka-examples', 'UPSTREAM: gwenshap/kafka-examples', 'notepad.png')
         }
     }
 
@@ -19,13 +19,13 @@ freeStyleJob('update_fork_confluent_kafka_rest') {
     scm {
         git {
             remote {
-                url('git@github.com:jeqo/confluent-kafka-rest.git')
+                url('git@github.com:jeqo/kafka-examples.git')
                 name('origin')
                 credentials('ssh-github-key')
                 refspec('+refs/heads/master:refs/remotes/origin/master')
             }
             remote {
-                url('https://github.com/confluentinc/confluent-kafka-rest.git')
+                url('https://github.com/gwenshap/kafka-examples.git')
                 name('upstream')
                 refspec('+refs/heads/master:refs/remotes/upstream/master')
             }

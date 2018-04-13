@@ -7,7 +7,7 @@ freeStyleJob('update_fork_confluent_schema_registry') {
     properties {
         githubProjectUrl('https://github.com/jeqo/confluent-schema-registry')
         sidebarLinks {
-            link('https://github.com/confluentinc/schema-registry', 'UPSTREAM: confluentinc/schema-registry', 'notepad.png')
+            link('https://github.com/confluentinc/confluent-schema-registry', 'UPSTREAM: confluentinc/confluent-schema-registry', 'notepad.png')
         }
     }
 
@@ -25,7 +25,7 @@ freeStyleJob('update_fork_confluent_schema_registry') {
                 refspec('+refs/heads/master:refs/remotes/origin/master')
             }
             remote {
-                url('https://github.com/confluentinc/schema-registry.git')
+                url('https://github.com/confluentinc/confluent-schema-registry.git')
                 name('upstream')
                 refspec('+refs/heads/master:refs/remotes/upstream/master')
             }

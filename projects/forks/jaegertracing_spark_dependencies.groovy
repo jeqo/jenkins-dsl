@@ -7,7 +7,7 @@ freeStyleJob('update_fork_jaegertracing_spark_dependencies') {
     properties {
         githubProjectUrl('https://github.com/jeqo/jaegertracing-spark-dependencies')
         sidebarLinks {
-            link('https://github.com/jaegertracing/spark-dependencies', 'UPSTREAM: jaegertracing/spark-dependencies', 'notepad.png')
+            link('https://github.com/jaegertracing/jaegertracing-spark-dependencies', 'UPSTREAM: jaegertracing/jaegertracing-spark-dependencies', 'notepad.png')
         }
     }
 
@@ -25,7 +25,7 @@ freeStyleJob('update_fork_jaegertracing_spark_dependencies') {
                 refspec('+refs/heads/master:refs/remotes/origin/master')
             }
             remote {
-                url('https://github.com/jaegertracing/spark-dependencies.git')
+                url('https://github.com/jaegertracing/jaegertracing-spark-dependencies.git')
                 name('upstream')
                 refspec('+refs/heads/master:refs/remotes/upstream/master')
             }
