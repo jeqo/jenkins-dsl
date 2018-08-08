@@ -1,13 +1,13 @@
-freeStyleJob('update_fork_jaeger_client_java') {
-    displayName('update-fork-jaeger-client-java')
-    description('Rebase the primary branch (master) in jeqo/jaeger-client-java fork.')
+freeStyleJob('update_fork_brave') {
+    displayName('update-fork-brave')
+    description('Rebase the primary branch (master) in jeqo/brave fork.')
 
     checkoutRetryCount(3)
 
     properties {
-        githubProjectUrl('https://github.com/jeqo/jaeger-client-java')
+        githubProjectUrl('https://github.com/jeqo/brave')
         sidebarLinks {
-            link('https://github.com/jaegertracing/jaeger-client-java', 'UPSTREAM: jaegertracing/jaeger-client-java', 'notepad.png')
+            link('https://github.com/openzipkin/brave', 'UPSTREAM: openzipkin/brave', 'notepad.png')
         }
     }
 
@@ -19,13 +19,13 @@ freeStyleJob('update_fork_jaeger_client_java') {
     scm {
         git {
             remote {
-                url('git@github.com:jeqo/jaeger-client-java.git')
+                url('git@github.com:jeqo/brave.git')
                 name('origin')
                 credentials('ssh-github-key')
                 refspec('+refs/heads/master:refs/remotes/origin/master')
             }
             remote {
-                url('https://github.com/jaegertracing/jaeger-client-java.git')
+                url('https://github.com/openzipkin/brave.git')
                 name('upstream')
                 refspec('+refs/heads/master:refs/remotes/upstream/master')
             }

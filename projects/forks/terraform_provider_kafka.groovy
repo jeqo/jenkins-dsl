@@ -1,13 +1,13 @@
 freeStyleJob('update_fork_terraform_provider_kafka') {
     displayName('update-fork-terraform-provider-kafka')
-    description('Rebase the primary branch (develop) in jeqo/terraform-provider-kafka fork.')
+    description('Rebase the primary branch (master) in jeqo/terraform-provider-kafka fork.')
 
     checkoutRetryCount(3)
 
     properties {
         githubProjectUrl('https://github.com/jeqo/terraform-provider-kafka')
         sidebarLinks {
-            link('https://github.com/packetloop/terraform-provider-kafka', 'UPSTREAM: packetloop/terraform-provider-kafka', 'notepad.png')
+            link('https://github.com/sysco-middleware/terraform-provider-kafka', 'UPSTREAM: sysco-middleware/terraform-provider-kafka', 'notepad.png')
         }
     }
 
@@ -22,14 +22,14 @@ freeStyleJob('update_fork_terraform_provider_kafka') {
                 url('git@github.com:jeqo/terraform-provider-kafka.git')
                 name('origin')
                 credentials('ssh-github-key')
-                refspec('+refs/heads/develop:refs/remotes/origin/develop')
+                refspec('+refs/heads/master:refs/remotes/origin/master')
             }
             remote {
-                url('https://github.com/packetloop/terraform-provider-kafka.git')
+                url('https://github.com/sysco-middleware/terraform-provider-kafka.git')
                 name('upstream')
-                refspec('+refs/heads/develop:refs/remotes/upstream/develop')
+                refspec('+refs/heads/master:refs/remotes/upstream/master')
             }
-            branches('develop', 'upstream/develop')
+            branches('master', 'upstream/master')
             extensions {
                 disableRemotePoll()
                 wipeOutWorkspace()
@@ -45,13 +45,13 @@ freeStyleJob('update_fork_terraform_provider_kafka') {
     wrappers { colorizeOutput() }
 
     steps {
-        shell('git rebase upstream/develop')
+        shell('git rebase upstream/master')
     }
 
     publishers {
         postBuildTask {
             git {
-                branch('origin', 'develop')
+                branch('origin', 'master')
                 pushOnlyIfSuccess()
             }
         }

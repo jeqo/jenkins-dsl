@@ -23,7 +23,7 @@ API_HEADER="Accept: application/vnd.github.${API_VERSION}+json"
 AUTH_HEADER="Authorization: token ${GITHUB_TOKEN}"
 
 DEFAULT_PER_PAGE=50
-PAGE=3
+PAGES=3
 
 ignore_repos=( mac-dev-setup )
 
@@ -151,4 +151,4 @@ main(){
 	done
 }
 
-main
+for PAGE in $PAGES; do main; done

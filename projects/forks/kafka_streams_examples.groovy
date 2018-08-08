@@ -1,13 +1,13 @@
-freeStyleJob('update_fork_ansible_role_oracle_database') {
-    displayName('update-fork-ansible-role-oracle-database')
-    description('Rebase the primary branch (master) in jeqo/ansible-role-oracle-database fork.')
+freeStyleJob('update_fork_kafka_streams_examples') {
+    displayName('update-fork-kafka-streams-examples')
+    description('Rebase the primary branch (5.0.0-post) in jeqo/kafka-streams-examples fork.')
 
     checkoutRetryCount(3)
 
     properties {
-        githubProjectUrl('https://github.com/jeqo/ansible-role-oracle-database')
+        githubProjectUrl('https://github.com/jeqo/kafka-streams-examples')
         sidebarLinks {
-            link('https://github.com/sysco-middleware/ansible-role-oracle-database', 'UPSTREAM: sysco-middleware/ansible-role-oracle-database', 'notepad.png')
+            link('https://github.com/confluentinc/kafka-streams-examples', 'UPSTREAM: confluentinc/kafka-streams-examples', 'notepad.png')
         }
     }
 
@@ -19,17 +19,17 @@ freeStyleJob('update_fork_ansible_role_oracle_database') {
     scm {
         git {
             remote {
-                url('git@github.com:jeqo/ansible-role-oracle-database.git')
+                url('git@github.com:jeqo/kafka-streams-examples.git')
                 name('origin')
                 credentials('ssh-github-key')
-                refspec('+refs/heads/master:refs/remotes/origin/master')
+                refspec('+refs/heads/5.0.0-post:refs/remotes/origin/5.0.0-post')
             }
             remote {
-                url('https://github.com/sysco-middleware/ansible-role-oracle-database.git')
+                url('https://github.com/confluentinc/kafka-streams-examples.git')
                 name('upstream')
-                refspec('+refs/heads/master:refs/remotes/upstream/master')
+                refspec('+refs/heads/5.0.0-post:refs/remotes/upstream/5.0.0-post')
             }
-            branches('master', 'upstream/master')
+            branches('5.0.0-post', 'upstream/5.0.0-post')
             extensions {
                 disableRemotePoll()
                 wipeOutWorkspace()
@@ -45,13 +45,13 @@ freeStyleJob('update_fork_ansible_role_oracle_database') {
     wrappers { colorizeOutput() }
 
     steps {
-        shell('git rebase upstream/master')
+        shell('git rebase upstream/5.0.0-post')
     }
 
     publishers {
         postBuildTask {
             git {
-                branch('origin', 'master')
+                branch('origin', '5.0.0-post')
                 pushOnlyIfSuccess()
             }
         }

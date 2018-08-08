@@ -1,13 +1,13 @@
-freeStyleJob('update_fork_lagom') {
-    displayName('update-fork-lagom')
-    description('Rebase the primary branch (master) in jeqo/lagom fork.')
+freeStyleJob('update_fork_alpakka_connectors') {
+    displayName('update-fork-alpakka-connectors')
+    description('Rebase the primary branch (master) in jeqo/alpakka-connectors fork.')
 
     checkoutRetryCount(3)
 
     properties {
-        githubProjectUrl('https://github.com/jeqo/lagom')
+        githubProjectUrl('https://github.com/jeqo/alpakka-connectors')
         sidebarLinks {
-            link('https://github.com/lagom/lagom', 'UPSTREAM: lagom/lagom', 'notepad.png')
+            link('https://github.com/sysco-middleware/alpakka-connectors', 'UPSTREAM: sysco-middleware/alpakka-connectors', 'notepad.png')
         }
     }
 
@@ -19,13 +19,13 @@ freeStyleJob('update_fork_lagom') {
     scm {
         git {
             remote {
-                url('git@github.com:jeqo/lagom.git')
+                url('git@github.com:jeqo/alpakka-connectors.git')
                 name('origin')
                 credentials('ssh-github-key')
                 refspec('+refs/heads/master:refs/remotes/origin/master')
             }
             remote {
-                url('https://github.com/lagom/lagom.git')
+                url('https://github.com/sysco-middleware/alpakka-connectors.git')
                 name('upstream')
                 refspec('+refs/heads/master:refs/remotes/upstream/master')
             }

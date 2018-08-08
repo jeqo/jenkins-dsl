@@ -1,13 +1,13 @@
-freeStyleJob('update_fork_opentracing_java') {
-    displayName('update-fork-opentracing-java')
-    description('Rebase the primary branch (master) in jeqo/opentracing-java fork.')
+freeStyleJob('update_fork_jmx_exporter') {
+    displayName('update-fork-jmx_exporter')
+    description('Rebase the primary branch (master) in jeqo/jmx_exporter fork.')
 
     checkoutRetryCount(3)
 
     properties {
-        githubProjectUrl('https://github.com/jeqo/opentracing-java')
+        githubProjectUrl('https://github.com/jeqo/jmx_exporter')
         sidebarLinks {
-            link('https://github.com/opentracing/opentracing-java', 'UPSTREAM: opentracing/opentracing-java', 'notepad.png')
+            link('https://github.com/prometheus/jmx_exporter', 'UPSTREAM: prometheus/jmx_exporter', 'notepad.png')
         }
     }
 
@@ -19,13 +19,13 @@ freeStyleJob('update_fork_opentracing_java') {
     scm {
         git {
             remote {
-                url('git@github.com:jeqo/opentracing-java.git')
+                url('git@github.com:jeqo/jmx_exporter.git')
                 name('origin')
                 credentials('ssh-github-key')
                 refspec('+refs/heads/master:refs/remotes/origin/master')
             }
             remote {
-                url('https://github.com/opentracing/opentracing-java.git')
+                url('https://github.com/prometheus/jmx_exporter.git')
                 name('upstream')
                 refspec('+refs/heads/master:refs/remotes/upstream/master')
             }

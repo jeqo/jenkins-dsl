@@ -1,13 +1,13 @@
-freeStyleJob('update_fork_alpakka') {
-    displayName('update-fork-alpakka')
-    description('Rebase the primary branch (master) in jeqo/alpakka fork.')
+freeStyleJob('update_fork_avrodoc') {
+    displayName('update-fork-avrodoc')
+    description('Rebase the primary branch (master) in jeqo/avrodoc fork.')
 
     checkoutRetryCount(3)
 
     properties {
-        githubProjectUrl('https://github.com/jeqo/alpakka')
+        githubProjectUrl('https://github.com/jeqo/avrodoc')
         sidebarLinks {
-            link('https://github.com/akka/alpakka', 'UPSTREAM: akka/alpakka', 'notepad.png')
+            link('https://github.com/ept/avrodoc', 'UPSTREAM: ept/avrodoc', 'notepad.png')
         }
     }
 
@@ -19,13 +19,13 @@ freeStyleJob('update_fork_alpakka') {
     scm {
         git {
             remote {
-                url('git@github.com:jeqo/alpakka.git')
+                url('git@github.com:jeqo/avrodoc.git')
                 name('origin')
                 credentials('ssh-github-key')
                 refspec('+refs/heads/master:refs/remotes/origin/master')
             }
             remote {
-                url('https://github.com/akka/alpakka.git')
+                url('https://github.com/ept/avrodoc.git')
                 name('upstream')
                 refspec('+refs/heads/master:refs/remotes/upstream/master')
             }

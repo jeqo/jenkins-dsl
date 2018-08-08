@@ -1,13 +1,13 @@
-freeStyleJob('update_fork_confluent_kafka_rest') {
-    displayName('update-fork-confluent-kafka-rest')
-    description('Rebase the primary branch (master) in jeqo/confluent-kafka-rest fork.')
+freeStyleJob('update_fork_opencensus_experiments') {
+    displayName('update-fork-opencensus-experiments')
+    description('Rebase the primary branch (master) in jeqo/opencensus-experiments fork.')
 
     checkoutRetryCount(3)
 
     properties {
-        githubProjectUrl('https://github.com/jeqo/confluent-kafka-rest')
+        githubProjectUrl('https://github.com/jeqo/opencensus-experiments')
         sidebarLinks {
-            link('https://github.com/confluentinc/confluent-kafka-rest', 'UPSTREAM: confluentinc/confluent-kafka-rest', 'notepad.png')
+            link('https://github.com/census-ecosystem/opencensus-experiments', 'UPSTREAM: census-ecosystem/opencensus-experiments', 'notepad.png')
         }
     }
 
@@ -19,13 +19,13 @@ freeStyleJob('update_fork_confluent_kafka_rest') {
     scm {
         git {
             remote {
-                url('git@github.com:jeqo/confluent-kafka-rest.git')
+                url('git@github.com:jeqo/opencensus-experiments.git')
                 name('origin')
                 credentials('ssh-github-key')
                 refspec('+refs/heads/master:refs/remotes/origin/master')
             }
             remote {
-                url('https://github.com/confluentinc/confluent-kafka-rest.git')
+                url('https://github.com/census-ecosystem/opencensus-experiments.git')
                 name('upstream')
                 refspec('+refs/heads/master:refs/remotes/upstream/master')
             }

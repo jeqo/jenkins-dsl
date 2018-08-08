@@ -1,13 +1,13 @@
-freeStyleJob('update_fork_confluent_schema_registry') {
-    displayName('update-fork-confluent-schema-registry')
-    description('Rebase the primary branch (master) in jeqo/confluent-schema-registry fork.')
+freeStyleJob('update_fork_kafka_site') {
+    displayName('update-fork-kafka-site')
+    description('Rebase the primary branch (asf-site) in jeqo/kafka-site fork.')
 
     checkoutRetryCount(3)
 
     properties {
-        githubProjectUrl('https://github.com/jeqo/confluent-schema-registry')
+        githubProjectUrl('https://github.com/jeqo/kafka-site')
         sidebarLinks {
-            link('https://github.com/confluentinc/confluent-schema-registry', 'UPSTREAM: confluentinc/confluent-schema-registry', 'notepad.png')
+            link('https://github.com/apache/kafka-site', 'UPSTREAM: apache/kafka-site', 'notepad.png')
         }
     }
 
@@ -19,17 +19,17 @@ freeStyleJob('update_fork_confluent_schema_registry') {
     scm {
         git {
             remote {
-                url('git@github.com:jeqo/confluent-schema-registry.git')
+                url('git@github.com:jeqo/kafka-site.git')
                 name('origin')
                 credentials('ssh-github-key')
-                refspec('+refs/heads/master:refs/remotes/origin/master')
+                refspec('+refs/heads/asf-site:refs/remotes/origin/asf-site')
             }
             remote {
-                url('https://github.com/confluentinc/confluent-schema-registry.git')
+                url('https://github.com/apache/kafka-site.git')
                 name('upstream')
-                refspec('+refs/heads/master:refs/remotes/upstream/master')
+                refspec('+refs/heads/asf-site:refs/remotes/upstream/asf-site')
             }
-            branches('master', 'upstream/master')
+            branches('asf-site', 'upstream/asf-site')
             extensions {
                 disableRemotePoll()
                 wipeOutWorkspace()
@@ -45,13 +45,13 @@ freeStyleJob('update_fork_confluent_schema_registry') {
     wrappers { colorizeOutput() }
 
     steps {
-        shell('git rebase upstream/master')
+        shell('git rebase upstream/asf-site')
     }
 
     publishers {
         postBuildTask {
             git {
-                branch('origin', 'master')
+                branch('origin', 'asf-site')
                 pushOnlyIfSuccess()
             }
         }

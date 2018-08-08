@@ -1,13 +1,13 @@
-freeStyleJob('update_fork_ksql') {
-    displayName('update-fork-ksql')
-    description('Rebase the primary branch (0.1.x) in jeqo/ksql fork.')
+freeStyleJob('update_fork__vim') {
+    displayName('update-fork-.vim')
+    description('Rebase the primary branch (master) in jeqo/.vim fork.')
 
     checkoutRetryCount(3)
 
     properties {
-        githubProjectUrl('https://github.com/jeqo/ksql')
+        githubProjectUrl('https://github.com/jeqo/.vim')
         sidebarLinks {
-            link('https://github.com/confluentinc/ksql', 'UPSTREAM: confluentinc/ksql', 'notepad.png')
+            link('https://github.com/jessfraz/.vim', 'UPSTREAM: jessfraz/.vim', 'notepad.png')
         }
     }
 
@@ -19,17 +19,17 @@ freeStyleJob('update_fork_ksql') {
     scm {
         git {
             remote {
-                url('git@github.com:jeqo/ksql.git')
+                url('git@github.com:jeqo/.vim.git')
                 name('origin')
                 credentials('ssh-github-key')
-                refspec('+refs/heads/0.1.x:refs/remotes/origin/0.1.x')
+                refspec('+refs/heads/master:refs/remotes/origin/master')
             }
             remote {
-                url('https://github.com/confluentinc/ksql.git')
+                url('https://github.com/jessfraz/.vim.git')
                 name('upstream')
-                refspec('+refs/heads/0.1.x:refs/remotes/upstream/0.1.x')
+                refspec('+refs/heads/master:refs/remotes/upstream/master')
             }
-            branches('0.1.x', 'upstream/0.1.x')
+            branches('master', 'upstream/master')
             extensions {
                 disableRemotePoll()
                 wipeOutWorkspace()
@@ -45,13 +45,13 @@ freeStyleJob('update_fork_ksql') {
     wrappers { colorizeOutput() }
 
     steps {
-        shell('git rebase upstream/0.1.x')
+        shell('git rebase upstream/master')
     }
 
     publishers {
         postBuildTask {
             git {
-                branch('origin', '0.1.x')
+                branch('origin', 'master')
                 pushOnlyIfSuccess()
             }
         }
